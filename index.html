@@ -114,6 +114,9 @@
   .probe-jump button { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; font: inherit; text-decoration: underline; text-underline-offset: 2px; }
   .probe-jump button:hover { filter: brightness(1.1); }
   .probe-jump.empty button { color: var(--ink-faint); text-decoration: none; cursor: default; }
+  .grid-mini { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .mini { background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 10px 6px; }
+  .mini-h { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
   .pill { font-size: 13px; padding: 2px 8px; border-radius: 999px; font-weight: 700; }
   .pill.ok { background: rgba(87,199,133,.14); color: var(--good); }
   .pill.no { background: rgba(229,101,122,.14); color: var(--bad); }
@@ -1204,6 +1207,18 @@ const QUESTION_BANK = /*__BANK_START__*/[
 </script>
 
 <script>
+/* Frozen calibration baselines: three frontier-model trios (Opus/Fable/Haiku)
+   that played the hard question set through the quiz API, exported once with
+   tools/export_ai_baselines.mjs. Only (confidence, correct) pairs are kept;
+   every metric is recomputed client-side by Calib, so nothing can drift. */
+const AI_BASELINES = /*__AI_START__*/{
+  "opus": {"label":"Opus","runs":3,"difficulty":"hard","pairs":[[0.85,1],[0.7,1],[0.92,1],[0.7,0],[0.95,1],[0.85,1],[0.95,1],[0.9,1],[0.95,1],[0.98,1],[0.75,1],[0.97,1],[0.95,1],[0.95,1],[0.97,1],[0.9,1],[0.97,1],[0.85,1],[0.95,1],[0.92,1],[0.9,1],[0.75,1],[0.9,1],[0.55,1],[0.92,1],[0.98,1],[0.98,1],[0.95,1],[0.9,1],[0.78,1],[0.8,1],[0.99,1],[0.6,1],[0.82,1],[0.95,1],[0.92,1],[0.97,1],[0.85,1],[0.78,1],[0.9,1],[0.85,1],[0.9,1],[0.85,1],[0.97,1],[0.95,1],[0.5,1],[0.97,1],[0.72,1],[0.9,1],[0.95,1],[0.8,1],[0.97,1],[0.95,1],[0.9,1],[0.55,1],[0.95,1],[0.9,1],[0.98,1],[0.98,1],[0.55,1],[0.85,1],[0.92,1],[0.85,1],[0.85,1],[0.99,1],[0.98,1],[0.92,1],[0.99,1],[0.88,1],[0.9,1],[0.95,1],[0.95,1],[0.98,1],[0.7,1],[0.6,1]]},
+  "fable": {"label":"Fable","runs":3,"difficulty":"hard","pairs":[[0.98,1],[0.97,1],[0.95,1],[0.7,1],[0.97,1],[0.99,1],[0.75,1],[0.9,1],[0.7,1],[0.98,1],[0.95,1],[0.99,1],[0.9,1],[0.99,1],[0.9,1],[0.92,1],[0.9,1],[0.95,1],[0.98,1],[0.98,1],[0.95,1],[0.99,1],[0.85,1],[0.97,1],[0.98,1],[0.95,1],[0.85,1],[0.99,1],[0.96,1],[0.97,1],[0.95,1],[0.97,1],[0.8,1],[0.99,1],[0.95,1],[0.95,1],[0.97,1],[0.96,1],[0.97,1],[0.9,1],[0.96,1],[0.97,1],[0.96,1],[0.98,1],[0.9,1],[0.93,1],[0.99,1],[0.99,1],[0.98,1],[0.85,1],[0.93,1],[0.7,1],[0.92,1],[0.98,1],[0.94,1],[0.85,1],[0.9,1],[0.99,1],[0.95,1],[0.93,1]]},
+  "haiku": {"label":"Haiku","runs":3,"difficulty":"hard","pairs":[[0.85,1],[0.92,1],[0.35,0],[0.88,1],[0.75,1],[0.8,1],[0.88,1],[0.92,1],[0.89,1],[0.87,1],[0.82,1],[0.78,1],[0.8,1],[0.95,1],[0.93,1],[0.5,1],[0.92,1],[0.6,1],[0.88,1],[0.9,1],[0.78,1],[0.92,1],[0.82,1],[0.8,1],[0.28,0],[0.92,1],[0.78,1],[0.95,1],[0.98,1],[0.75,1],[0.95,1],[0.99,1],[0.85,1],[0.72,1],[0.9,1],[0.88,1],[0.8,1],[0.99,1],[0.99,1],[0.68,1],[0.92,1],[0.88,1],[0.8,1],[0.82,1],[0.83,1],[0.55,1],[0.99,1],[0.96,1],[0.75,1],[0.88,1],[0.4,1],[0.85,1],[0.9,1],[0.95,1],[0.95,1],[0.95,1],[0.9,1],[0.98,1],[0.6,1],[0.65,0],[0.85,1],[0.75,1],[0.6,1],[0.98,1],[0.85,1],[0.7,1],[0.85,1],[0.95,1],[0.7,1],[0.8,1],[0.35,0],[0.95,1],[0.85,1],[0.4,1],[0.85,1]]}
+}/*__AI_END__*/;
+</script>
+
+<script>
 /* ====================================================================
    The Overconfidence Olympiad — app layer.
    Pure math is in the Calib block above; this file only does DOM,
@@ -1225,44 +1240,54 @@ const QUESTION_BANK = /*__BANK_START__*/[
   const num = (x, d = 3) => (x == null || !isFinite(x)) ? "—" : x.toFixed(d);
   const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
-  // ---- identity + unified API ----------------------------------------
-  // Play runs through the same server the agents use. Only a pseudonymous
-  // player id and a display name live in localStorage; all game data (runs,
-  // career, leaderboard) is server-side in one store.
-  const PID_KEY = "cal.v3.pid", NAME_KEY = "cal.v3.name";
-  function playerId() {
-    let id = localStorage.getItem(PID_KEY);
-    if (!id) { id = "u_" + Math.random().toString(36).slice(2, 10); localStorage.setItem(PID_KEY, id); }
-    return id;
-  }
-  const playerName = () => localStorage.getItem(NAME_KEY) || "";
-  const setPlayerName = (n) => localStorage.setItem(NAME_KEY, n.slice(0, 24));
-  const stripLetter = (o) => String(o).replace(/^[A-D]\.\s*/, "");
-
-  const API = {
-    async _post(path, body) {
-      const r = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-      if (!r.ok) throw new Error(`${path} -> ${r.status}`);
-      return r.json();
+  // ---- storage (local-first: everything stays in this browser) --------
+  const K = { hist: "cal.v2.history", seen: "cal.v2.seen", rounds: "cal.v2.rounds" };
+  const Store = {
+    read(k, dflt) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? dflt : v; } catch { return dflt; } },
+    write(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* quota / private mode: run in-memory */ } },
+    history() { return Store.read(K.hist, []); },
+    seen() { return new Set(Store.read(K.seen, [])); },
+    rounds() { return Store.read(K.rounds, []); },
+    commitRound(records) {
+      const hist = Store.history().concat(records);
+      Store.write(K.hist, hist);
+      const seen = Store.seen();
+      records.forEach((r) => seen.add(r.qid));
+      Store.write(K.seen, [...seen]);
+      const brier = Calib.brier(hist.map((r) => r.conf), hist.map((r) => r.correct ? 1 : 0));
+      const rounds = Store.rounds();
+      rounds.push({ n: hist.length, brier });
+      Store.write(K.rounds, rounds);
+      return hist;
     },
-    async _get(path) {
-      const r = await fetch(path);
-      if (!r.ok) throw new Error(`${path} -> ${r.status}`);
-      return r.json();
-    },
-    start(n, difficulty) { return API._post("/api/start", { player: playerName() || playerId(), playerType: "human", n, difficulty }); },
-    answer(session_id, answer, confidence) { return API._post("/api/answer", { session_id, answer, confidence }); },
-    report(session_id) { return API._get("/api/report?session_id=" + encodeURIComponent(session_id)); },
-    career() { return API._get("/api/career?player=" + encodeURIComponent(playerName() || playerId())); },
-    leaderboard() { return API._get("/api/leaderboard"); },
-    run(id) { return API._get("/api/run?id=" + encodeURIComponent(id)); },
+    wipe() { [K.hist, K.seen, K.rounds].forEach((k) => localStorage.removeItem(k)); },
   };
-  // report.review rows -> the record shape the results UI expects
-  const reviewToRecords = (review) => review.map((x) => ({
-    conf: x.stated_confidence, correct: !!x.was_correct,
-    cat: x.category, diff: x.difficulty, question: x.question,
-    chosenText: x.chosen, correctText: x.correct_answer,
-  }));
+
+  // ---- question sampling (local, from the embedded bank) --------------
+  function sample(n, difficulty) {
+    const bank = (!difficulty || difficulty === "mixed") ? QUESTION_BANK : QUESTION_BANK.filter((q) => q.difficulty === difficulty);
+    const seen = Store.seen();
+    let pool = bank.filter((q) => !seen.has(q.id));
+    let reset = false;
+    if (pool.length < n) { // exhausted this difficulty in this browser — recycle it
+      const ids = new Set(bank.map((q) => q.id));
+      Store.write(K.seen, [...seen].filter((id) => !ids.has(id)));
+      pool = bank.slice(); reset = true;
+    }
+    const picked = shuffle(pool.slice()).slice(0, n);
+    return { reset, questions: picked.map((q) => {
+      const order = shuffle(q.options.map((_, i) => i));
+      return {
+        id: q.id, category: q.category, difficulty: q.difficulty, question: q.question,
+        options: order.map((i) => q.options[i]),
+        answerIndex: order.indexOf(q.answerIndex),
+      };
+    }) };
+  }
+
+  // ---- frozen AI baselines (for the "You vs. the machines" tab) --------
+  const AI_ORDER = ["opus", "fable", "haiku"];
+  const aiRecords = (key) => (AI_BASELINES[key]?.pairs || []).map(([conf, correct]) => ({ conf, correct: !!correct }));
 
   // ---- copy -----------------------------------------------------------
   const PROGRESS_JOKes = [
@@ -1282,26 +1307,25 @@ const QUESTION_BANK = /*__BANK_START__*/[
   // ====================================================================
   // HOME
   // ====================================================================
-  async function renderHome() {
+  function renderHome() {
+    const hist = Store.history();
+    const n = hist.length;
     let career = "";
-    try {
-      const c = await API.career();
-      if (c.metrics && c.metrics.n > 0) {
-        const g = c.metrics.overconfidence_gap;
-        career = `<div class="card"><h3>Your standing record</h3>
-          <div class="kpi">
-            <div class="box"><div class="v">${c.metrics.n}</div><div class="l">answers logged</div></div>
-            <div class="box"><div class="v">${pct(c.metrics.accuracy)}</div><div class="l">accuracy</div></div>
-            <div class="box"><div class="v">${pct(c.metrics.mean_confidence)}</div><div class="l">avg confidence</div></div>
-            <div class="box"><div class="v" style="color:${g > 0.03 ? "var(--bad)" : g < -0.03 ? "var(--platt)" : "var(--good)"}">${g > 0 ? "+" : ""}${pct(g)}</div><div class="l">overconfidence gap</div></div>
-          </div>
-          <div class="row between" style="margin-top:14px">
-            <button class="primary" id="btnProfile">View full profile →</button>
-            <button class="ghost" id="btnWipe">Start a fresh identity</button>
-          </div></div>`;
-      }
-    } catch { career = `<div class="disclaimer severe">Can't reach the quiz server. Start it with <code>node server.mjs</code> and reload.</div>`; }
-
+    if (n > 0) {
+      const p = hist.map((r) => r.conf), y = hist.map((r) => r.correct ? 1 : 0);
+      const gap = Calib.overconfidenceGap(p, y);
+      career = `<div class="card"><h3>Your standing record</h3>
+        <div class="kpi">
+          <div class="box"><div class="v">${n}</div><div class="l">answers logged</div></div>
+          <div class="box"><div class="v">${pct(Calib.mean(y))}</div><div class="l">accuracy</div></div>
+          <div class="box"><div class="v">${pct(Calib.mean(p))}</div><div class="l">avg confidence</div></div>
+          <div class="box"><div class="v" style="color:${gap > 0.03 ? "var(--bad)" : gap < -0.03 ? "var(--platt)" : "var(--good)"}">${gap > 0 ? "+" : ""}${pct(gap)}</div><div class="l">overconfidence gap</div></div>
+        </div>
+        <div class="row between" style="margin-top:14px">
+          <button class="primary" id="btnProfile">View full profile →</button>
+          <button class="ghost" id="btnWipe">Wipe my shameful history</button>
+        </div></div>`;
+    }
     app.innerHTML = `
       <h1>The Overconfidence Olympiad</h1>
       <p class="subtitle">Answer trivia, rate your confidence, then watch four calibration
@@ -1311,9 +1335,6 @@ const QUESTION_BANK = /*__BANK_START__*/[
         No feedback until the end — that's what keeps the reveal honest (and cruel). Everything
         is scored with real statistics: Brier, ECE, AUROC, log loss, and the calibration curve
         of your soul.</p>
-        <h3>Display name (for the leaderboard)</h3>
-        <input id="nameInput" type="text" maxlength="24" placeholder="anon" value="${esc(playerName())}"
-          style="width:100%;max-width:280px;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);font:inherit" />
         <h3>Round length</h3>
         <div class="seg" role="group" aria-label="Round length">
           ${[10, 25, 50].map((v) => `<button data-len="${v}" class="${S.roundLen === v ? "on" : ""}">${v}</button>`).join("")}
@@ -1322,28 +1343,25 @@ const QUESTION_BANK = /*__BANK_START__*/[
         <div class="seg" role="group" aria-label="Difficulty">
           ${["mixed", "easy", "medium", "hard"].map((d) => `<button data-diff="${d}" class="${S.difficulty === d ? "on" : ""}">${d}</button>`).join("")}
         </div>
-        <p class="faint" style="margin-top:8px">10 is a coffee break; 25 is enough for a defensible verdict; 50 is the full audit.</p>
+        <p class="faint" style="margin-top:8px">10 is a coffee break; 25 is enough for a defensible verdict; 50 is the full audit.
+        The frontier models in the comparison played <strong>hard</strong>.</p>
         <div class="row" style="margin-top:16px">
           <button class="primary" id="btnStart">Begin the humbling →</button>
-          <button class="ghost" id="btnBoard">Leaderboard</button>
         </div>
       </div>
       ${career}
-      <p class="footer">Runs on the unified quiz server — humans and AI models play the same API and land
-      on the same leaderboard. Questions from the Open Trivia Database (CC BY-SA 4.0) plus hand-written fills.</p>`;
+      <p class="footer">Everything runs and stays in your browser — no server, no data leaves this page.
+      Questions from the Open Trivia Database (CC BY-SA 4.0) plus hand-written fills.</p>`;
 
-    const nameEl = app.querySelector("#nameInput");
-    if (nameEl) nameEl.addEventListener("change", () => setPlayerName(nameEl.value.trim()));
     app.querySelectorAll("[data-len]").forEach((b) =>
       b.addEventListener("click", () => { S.roundLen = +b.dataset.len; renderHome(); }));
     app.querySelectorAll("[data-diff]").forEach((b) =>
       b.addEventListener("click", () => { S.difficulty = b.dataset.diff; renderHome(); }));
     app.querySelector("#btnStart").addEventListener("click", startRound);
-    app.querySelector("#btnBoard").addEventListener("click", renderLeaderboard);
     const w = app.querySelector("#btnWipe");
     if (w) w.addEventListener("click", () => {
-      if (confirm("Start a fresh identity? This abandons your current player id — old runs stay on the board under the old name, but you begin a clean career.")) {
-        localStorage.removeItem(PID_KEY); localStorage.removeItem(NAME_KEY); renderHome();
+      if (confirm("Erase your entire calibration history? Your Brier score will be reborn, sinless.")) {
+        Store.wipe(); renderHome();
       }
     });
     const prof = app.querySelector("#btnProfile");
@@ -1351,36 +1369,29 @@ const QUESTION_BANK = /*__BANK_START__*/[
   }
 
   // Jump straight to the career stats screen without playing a round.
-  async function viewProfile() {
-    app.innerHTML = `<div class="card center"><p class="muted">Loading your profile…</p></div>`;
-    try {
-      const c = await API.career();
-      if (!c.metrics || !c.metrics.n) return renderHome();
-      S = { view: "results", profile: true, roundLen: S.roundLen, difficulty: S.difficulty, round: [], scope: "career", hist: c.records, careerHistory: c.history || [], probe: S.probe };
-      renderResults();
-    } catch (e) { renderError("Couldn't load your profile.", e); }
+  function viewProfile() {
+    const hist = Store.history();
+    if (!hist.length) return;
+    S = { view: "results", profile: true, roundLen: S.roundLen, difficulty: S.difficulty, round: [], scope: "career", hist, probe: S.probe };
+    renderResults();
   }
 
   // ====================================================================
   // PLAYING
   // ====================================================================
-  async function startRound() {
-    const roundLen = S.roundLen, difficulty = S.difficulty;
-    app.innerHTML = `<div class="card center"><p class="muted">Dealing questions…</p></div>`;
-    try {
-      const r = await API.start(roundLen, difficulty);
-      S = { view: "playing", roundLen, difficulty, session: r.session_id, current: r.question, total: r.question.total, chosen: null, phase: "pick", probe: S.probe };
-      renderPlaying();
-    } catch (e) { renderError("Couldn't start a round.", e); }
+  function startRound() {
+    const s = sample(S.roundLen, S.difficulty);
+    S = { view: "playing", roundLen: S.roundLen, difficulty: S.difficulty, questions: s.questions, i: 0, phase: "pick", chosen: null, records: [], probe: S.probe };
+    renderPlaying();
   }
 
   function renderPlaying() {
-    const q = S.current;                 // { number, total, category, difficulty, question, options:["A. …"] }
-    const progress = (q.number - 1) / q.total;
-    const joke = PROGRESS_JOKes[(q.number - 1) % PROGRESS_JOKes.length];
+    const q = S.questions[S.i];
+    const progress = S.i / S.questions.length;
+    const joke = PROGRESS_JOKes[S.i % PROGRESS_JOKes.length];
     const opts = q.options.map((o, i) =>
       `<button class="opt ${S.chosen === i ? "sel" : ""}" data-opt="${i}">
-        <span class="k">${String.fromCharCode(65 + i)}</span><span>${esc(stripLetter(o))}</span></button>`).join("");
+        <span class="k">${String.fromCharCode(65 + i)}</span><span>${esc(o)}</span></button>`).join("");
     const likert = S.phase === "conf" ? `
       <div class="card">
         <h3>How sure are you?</h3>
@@ -1393,7 +1404,7 @@ const QUESTION_BANK = /*__BANK_START__*/[
     app.innerHTML = `
       <div class="row between">
         <span class="tag ${q.difficulty}">${q.difficulty}</span>
-        <span class="muted">${CATS[q.category] || q.category} · ${q.number} / ${q.total}</span>
+        <span class="muted">${CATS[q.category] || q.category} · ${S.i + 1} / ${S.questions.length}</span>
       </div>
       <div class="bar" style="margin:12px 0"><span style="width:${progress * 100}%"></span></div>
       <p class="faint" style="margin-top:-4px">${joke}</p>
@@ -1411,47 +1422,28 @@ const QUESTION_BANK = /*__BANK_START__*/[
       b.addEventListener("click", () => answerQuestion(+b.dataset.conf)));
   }
 
-  async function answerQuestion(confIdx) {
-    const letter = "ABCD"[S.chosen];
-    const conf = LIKERT[confIdx];
-    app.querySelectorAll("[data-conf]").forEach((b) => (b.disabled = true));
-    try {
-      const r = await API.answer(S.session, letter, conf);
-      if (r.complete) return finishRound();
-      S.current = r.question; S.chosen = null; S.phase = "pick";
-      renderPlaying();
-    } catch (e) { renderError("Couldn't record that answer.", e); }
+  function answerQuestion(confIdx) {
+    const q = S.questions[S.i];
+    S.records.push({
+      qid: q.id, cat: q.category, diff: q.difficulty,
+      conf: LIKERT[confIdx], confIdx,
+      correct: S.chosen === q.answerIndex,
+      chosen: S.chosen, answerIndex: q.answerIndex,
+      question: q.question, options: q.options,
+    });
+    S.i++; S.chosen = null; S.phase = "pick";
+    if (S.i >= S.questions.length) finishRound();
+    else renderPlaying();
   }
 
   // ====================================================================
   // RESULTS
   // ====================================================================
-  async function finishRound() {
-    app.innerHTML = `<div class="card center"><p class="muted">Scoring…</p></div>`;
-    try {
-      const report = await API.report(S.session);
-      const career = await API.career();
-      S = {
-        view: "results", roundLen: S.roundLen, difficulty: S.difficulty,
-        round: reviewToRecords(report.review),
-        hist: career.records, careerHistory: career.history || [],
-        scope: career.records.length >= 40 ? "career" : "round",
-        probe: S.probe,
-      };
-      renderResults();
-    } catch (e) { renderError("Couldn't score the round.", e); }
-  }
-
-  function renderError(msg, e) {
-    app.innerHTML = `<div class="card">
-      <h2>${esc(msg)}</h2>
-      <p class="muted">The quiz server didn't respond. It runs the unified backend — make sure
-      <code>node server.mjs</code> is running and reload.</p>
-      <p class="faint">${esc((e && e.message) || "")}</p>
-      <div class="row" style="margin-top:12px"><button class="primary" id="btnReload">Reload</button></div>
-    </div>`;
-    const b = app.querySelector("#btnReload");
-    if (b) b.addEventListener("click", () => location.reload());
+  function finishRound() {
+    const roundRecords = S.records.map((r) => ({ qid: r.qid, conf: r.conf, correct: r.correct, cat: r.cat, diff: r.diff }));
+    const hist = Store.commitRound(roundRecords);
+    S = { view: "results", roundLen: S.roundLen, difficulty: S.difficulty, round: S.records, scope: hist.length >= 40 ? "career" : "round", hist, probe: S.probe };
+    renderResults();
   }
 
   function models(hist) {
@@ -1601,7 +1593,7 @@ const QUESTION_BANK = /*__BANK_START__*/[
         </div>
       </details>` : "";
 
-    const rounds = S.careerHistory || [];
+    const rounds = Store.rounds();
     const sparkBlock = rounds.length >= 2 ? `
       <div class="card"><h3>Career Brier over time</h3>
         ${sparkline(rounds)}
@@ -1610,9 +1602,13 @@ const QUESTION_BANK = /*__BANK_START__*/[
 
     app.innerHTML = `
       <div class="row between">
-        <h1 style="margin:0">${S.viewingPlayer ? esc(S.viewingPlayer) + "’s card" : profile ? "Your profile" : "The reckoning"}</h1>
-        <button class="ghost" id="btnHome">← ${S.backToBoard ? "Leaderboard" : "Home"}</button>
+        <h1 style="margin:0">${profile ? "Your profile" : "The reckoning"}</h1>
+        <button class="ghost" id="btnHome">← Home</button>
       </div>
+      ${profile ? `<div class="seg" role="group" aria-label="Profile view" style="margin-bottom:14px">
+        <button class="on">Your card</button>
+        <button id="btnCompare">You vs. the machines</button>
+      </div>` : ""}
       <div class="card verdict">
         <span class="tag">Verdict</span>
         <div class="persona">${esc(v.persona)}</div>
@@ -1704,7 +1700,7 @@ const QUESTION_BANK = /*__BANK_START__*/[
         <button class="primary" id="btnAgain">${profile ? "Start a round" : "Go again (" + S.roundLen + ")"} →</button>
         <button class="ghost" id="btnHome2">Home</button>
       </div>
-      <p class="footer">Fits use ${S.viewingPlayer ? "this player's" : "your"} full career history (${careerN} answers).${profile ? "" : " The toggle above only changes which slice the table and curve summarize."}</p>`;
+      <p class="footer">Fits use your full career history (${careerN} answers).${profile ? "" : " The toggle above only changes which slice the table and curve summarize."}</p>`;
 
     // --- confidence translator (probe) ---
     const qs = (sel) => app.querySelector(sel);
@@ -1783,9 +1779,10 @@ const QUESTION_BANK = /*__BANK_START__*/[
     app.querySelectorAll("[data-scope]").forEach((b) =>
       b.addEventListener("click", () => { S.scope = b.dataset.scope; renderResults(); }));
     app.querySelector("#btnAgain").addEventListener("click", startRound);
-    const back = S.backToBoard ? renderLeaderboard : goHome;
-    app.querySelector("#btnHome").addEventListener("click", back);
+    app.querySelector("#btnHome").addEventListener("click", goHome);
     app.querySelector("#btnHome2").addEventListener("click", goHome);
+    const cmp = app.querySelector("#btnCompare");
+    if (cmp) cmp.addEventListener("click", () => { S.profile = true; renderCompare(); });
   }
 
   // Static markup only; the counterfactual value + method name + highlight are
@@ -1799,7 +1796,7 @@ const QUESTION_BANK = /*__BANK_START__*/[
           <span class="pill ${ok ? "ok" : "no"}">${ok ? "correct" : "wrong"}</span>
         </div>
         <p style="margin:6px 0">${esc(r.question)}</p>
-        <p class="faint" style="margin:2px 0">Your answer: <strong style="color:${ok ? "var(--good)" : "var(--bad)"}">${esc(r.chosenText)}</strong>${ok ? "" : ` &nbsp;·&nbsp; Correct: <strong style="color:var(--good)">${esc(r.correctText)}</strong>`}</p>
+        <p class="faint" style="margin:2px 0">Your answer: <strong style="color:${ok ? "var(--good)" : "var(--bad)"}">${esc(r.options[r.chosen])}</strong>${ok ? "" : ` &nbsp;·&nbsp; Correct: <strong style="color:var(--good)">${esc(r.options[r.answerIndex])}</strong>`}</p>
         <p class="faint" style="margin:2px 0">You said <strong>${Math.round(r.conf * 100)}%</strong>, which calibrates to <strong class="cf-value">–</strong>.</p>
       </div>`;
     }).join("");
@@ -1933,60 +1930,121 @@ const QUESTION_BANK = /*__BANK_START__*/[
   }
 
   // ====================================================================
-  // LEADERBOARD
+  // COMPARE — "You vs. the machines"
   // ====================================================================
-  async function renderLeaderboard() {
-    app.innerHTML = `<div class="card center"><p class="muted">Loading the boards…</p></div>`;
-    let lb;
-    try { lb = await API.leaderboard(); } catch (e) { return renderError("Couldn't load the leaderboard.", e); }
-    const me = (playerName() || playerId());
-    const tag = (r) => r.playerType === "model"
-      ? `<span class="tag" style="color:var(--platt);border-color:rgba(90,169,230,.4)">AI${r.model ? " · " + esc(r.model) : ""}</span>`
-      : "";
-    const nameCell = (r) => `${esc(r.player)}${r.player === me ? ' <span class="faint">(you)</span>' : ""} ${tag(r)}`;
-    const board = (title, blurb, rows, valFn, valLabel) => `
-      <div class="card"><h3>${title}</h3><p class="faint" style="margin-top:-2px">${blurb}</p>
-      ${rows.length ? `<table><thead><tr><th>#</th><th>Player</th><th>n</th><th>${valLabel}</th></tr></thead>
-        <tbody>${rows.slice(0, 10).map((r, i) => `<tr${r.player === me ? ' style="background:rgba(242,193,78,.08)"' : ""}>
-          <td>${i + 1}</td><td style="text-align:left">${nameCell(r)}</td><td>${r.n}</td><td>${valFn(r)}</td></tr>`).join("")}</tbody></table>`
-        : `<p class="muted">Nobody qualifies yet (need n≥10). Play a round.</p>`}</div>`;
+  const statOf = (records) => {
+    const p = records.map((r) => r.conf), y = records.map((r) => (r.correct ? 1 : 0));
+    return { n: p.length, acc: Calib.mean(y), conf: Calib.mean(p), gap: Calib.overconfidenceGap(p, y),
+      brier: Calib.brier(p, y), ece: Calib.ece(p, p, y), auroc: Calib.auroc(p, y) };
+  };
 
-    const cards = lb.all.filter((r) => r.n > 0).sort((a, b) => b.n - a.n);
-    app.innerHTML = `
-      <div class="row between">
-        <h1 style="margin:0">Leaderboard</h1>
-        <button class="ghost" id="btnHome">← Home</button>
-      </div>
-      <p class="muted">${esc(lb.note)} Humans and AI models play the same questions through the same API.</p>
-      ${board("Best calibrated", "Lowest ECE — stated confidence closest to reality.", lb.best_calibrated, (r) => pct(r.ece, 1), "ECE")}
-      ${board("Best forecaster", "Lowest Brier — the all-round proper-scoring champion.", lb.best_forecaster, (r) => num(r.brier, 3), "Brier")}
-      ${board("Hall of shame", "Largest overconfidence gap — swagger minus delivery.", lb.hall_of_shame, (r) => "+" + pct(r.overconfidence_gap, 1), "Gap")}
-      <div class="card"><h3>All report cards</h3>
-        ${cards.length ? `<p class="faint" style="margin-top:-2px">Every player, including sub-10-answer runs. Click to view the full calibration report.</p>
-        <table><thead><tr><th>Player</th><th>n</th><th>Acc</th><th>Brier</th><th>ECE</th><th>Gap</th></tr></thead>
-        <tbody>${cards.map((r) => `<tr class="lb-row" data-player="${esc(r.player)}" style="cursor:pointer">
-          <td style="text-align:left">${nameCell(r)}</td><td>${r.n}</td><td>${pct(r.accuracy)}</td>
-          <td>${num(r.brier, 3)}</td><td>${pct(r.ece, 1)}</td><td>${r.overconfidence_gap > 0 ? "+" : ""}${pct(r.overconfidence_gap, 1)}</td></tr>`).join("")}</tbody></table>`
-        : `<p class="muted">No runs recorded yet.</p>`}
-      </div>
-      <div class="row" style="margin-top:16px"><button class="ghost" id="btnHome2">Home</button></div>`;
-
-    app.querySelector("#btnHome").addEventListener("click", goHome);
-    app.querySelector("#btnHome2").addEventListener("click", goHome);
-    app.querySelectorAll(".lb-row").forEach((row) =>
-      row.addEventListener("click", () => viewPlayerCard(row.dataset.player)));
+  // A compact reliability diagram: diagonal + per-level dots (size = count) with
+  // Wilson bars. No method curves — one small multiple per player.
+  function miniReliability(records, color) {
+    const W = 300, H = 220, m = { l: 34, r: 10, t: 10, b: 26 };
+    const pw = W - m.l - m.r, ph = H - m.t - m.b, x0 = 0.2, x1 = 1.0;
+    const X = (c) => m.l + ((c - x0) / (x1 - x0)) * pw;
+    const Y = (a) => m.t + (1 - a) * ph;
+    const p = records.map((r) => r.conf), y = records.map((r) => (r.correct ? 1 : 0));
+    const bins = Calib.groupByLevel(p, p, y);
+    const maxN = Math.max(1, ...bins.map((b) => b.n));
+    let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="reliability">`;
+    for (let g = 0; g <= 1.0001; g += 0.5) {
+      s += `<line x1="${m.l}" y1="${Y(g)}" x2="${W - m.r}" y2="${Y(g)}" stroke="var(--line)"/>`;
+      s += `<text x="${m.l - 5}" y="${Y(g) + 3}" text-anchor="end" font-size="9">${Math.round(g * 100)}</text>`;
+    }
+    s += `<line x1="${X(x0)}" y1="${Y(x0)}" x2="${X(x1)}" y2="${Y(x1)}" stroke="var(--identity)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+    bins.forEach((b) => {
+      const correct = Math.round(b.acc * b.n), w = Calib.wilson(correct, b.n);
+      const cx = X(b.level), cy = Y(b.acc);
+      if (w) s += `<line x1="${cx}" y1="${Y(w.lo)}" x2="${cx}" y2="${Y(w.hi)}" stroke="${color}" stroke-width="1.2" opacity="0.55"/>`;
+      s += `<circle cx="${cx}" cy="${cy}" r="${3 + 5 * Math.sqrt(b.n / maxN)}" fill="${color}" opacity="0.9" stroke="#0e1116" stroke-width="1"/>`;
+    });
+    s += `</svg>`;
+    return s;
   }
 
-  // View any player's aggregated report card (read-only profile of someone else).
-  async function viewPlayerCard(player) {
-    app.innerHTML = `<div class="card center"><p class="muted">Loading ${esc(player)}'s card…</p></div>`;
-    try {
-      const c = await API._get("/api/career?player=" + encodeURIComponent(player));
-      if (!c.metrics || !c.metrics.n) return renderLeaderboard();
-      S = { view: "results", profile: true, viewingPlayer: player, roundLen: S.roundLen, difficulty: S.difficulty,
-        round: [], scope: "career", hist: c.records, careerHistory: c.history || [], probe: S.probe, backToBoard: true };
+  function renderCompare() {
+    if (!S.probe) S.probe = { conf: 0.85, method: "platt" };
+    const you = Store.history().map((r) => ({ conf: r.conf, correct: r.correct }));
+    const COLOR = { you: "var(--accent)", opus: "var(--platt)", fable: "var(--isotonic)", haiku: "var(--binning)" };
+    const players = [
+      { key: "you", label: "You", records: you, note: `${you.length} answers` },
+      ...AI_ORDER.map((k) => ({ key: k, label: AI_BASELINES[k].label, records: aiRecords(k),
+        note: `n=${AI_BASELINES[k].pairs.length}, hard` })),
+    ];
+    const stats = Object.fromEntries(players.map((pl) => [pl.key, statOf(pl.records)]));
+
+    // how many models is the player better-calibrated (lower ECE) than?
+    const youEce = stats.you.ece;
+    const beat = AI_ORDER.filter((k) => stats[k].ece > youEce).length;
+    const g = stats.you.gap;
+    const dir = g > 0.05 ? "overconfident" : g < -0.05 ? "underconfident" : "well-calibrated";
+    let verdict;
+    if (you.length < 10) verdict = `You've only logged ${you.length} answer${you.length === 1 ? "" : "s"} — play more before challenging the machines; the comparison below is mostly error bars for now.`;
+    else if (beat === 3) verdict = `You are better calibrated than all three frontier models. The machines are uniformly underconfident; you, apparently, are not.`;
+    else if (beat === 0) verdict = `All three frontier models are better calibrated than you here — though note they're all underconfident, so this is a low bar you're limbo-ing under from the other side.`;
+    else verdict = `You are better calibrated (lower ECE) than ${beat} of 3 frontier models, and ${dir} overall. The machines all hedge below what they know; where do you land?`;
+
+    const cell = (st, key) => {
+      if (key === "auroc") return st.auroc == null ? "—" : num(st.auroc, 3);
+      if (key === "n") return String(st.n);
+      if (key === "brier") return num(st.brier, 3);
+      if (key === "ece") return pct(st.ece, 1);
+      if (key === "gap") return (st.gap > 0 ? "+" : "") + pct(st.gap, 1);
+      return pct(st[key]);
+    };
+    const table = `<table>
+      <thead><tr><th>Player</th><th>n</th><th>Acc</th><th>Conf</th><th>Gap</th><th>Brier</th><th>ECE</th><th>AUROC</th></tr></thead>
+      <tbody>${players.map((pl) => {
+        const st = stats[pl.key], me = pl.key === "you";
+        return `<tr${me ? ' style="background:rgba(242,193,78,.10)"' : ""}>
+          <td style="text-align:left"><span class="swatch" style="background:${COLOR[pl.key]}"></span>${pl.label}</td>
+          <td>${cell(st, "n")}</td><td>${cell(st, "acc")}</td><td>${cell(st, "conf")}</td>
+          <td>${cell(st, "gap")}</td><td>${cell(st, "brier")}</td><td>${cell(st, "ece")}</td><td>${cell(st, "auroc")}</td>
+        </tr>`;
+      }).join("")}</tbody></table>`;
+
+    const smalls = `<div class="grid-mini">${players.map((pl) => `
+      <div class="mini">
+        <div class="mini-h"><span class="swatch" style="background:${COLOR[pl.key]}"></span>${pl.label}
+          <span class="faint" style="font-weight:400"> · ${pl.note}</span></div>
+        ${pl.records.length ? miniReliability(pl.records, COLOR[pl.key]) : `<p class="muted" style="font-size:13px">No data yet.</p>`}
+      </div>`).join("")}</div>`;
+
+    app.innerHTML = `
+      <div class="row between">
+        <h1 style="margin:0">Your profile</h1>
+        <button class="ghost" id="btnHome">← Home</button>
+      </div>
+      <div class="seg" role="group" aria-label="Profile view" style="margin-bottom:14px">
+        <button id="btnCard">Your card</button>
+        <button class="on">You vs. the machines</button>
+      </div>
+      <div class="card verdict">
+        <span class="tag">Head to head</span>
+        <p class="muted" style="max-width:640px;margin:8px auto 0">${esc(verdict)}</p>
+      </div>
+      <h2>Calibration curves, side by side</h2>
+      <div class="card">${smalls}
+        <p class="faint" style="margin-top:6px">Dots below the dashed line = confidence exceeded accuracy (overconfident); above = under.
+        Dot size is how often that confidence level was used; whiskers are 95% Wilson intervals.</p>
+      </div>
+      <h2>The numbers</h2>
+      <div class="card">${table}
+        <p class="faint" style="margin-top:8px">Lower Brier/ECE is better; AUROC near 1 means confidence tracks correctness.
+        Fable's AUROC is "—" because it went flawless — with no wrong answers there's nothing to discriminate.</p>
+      </div>
+      <div class="disclaimer">Apples-to-oranges warning: the three models each played a <strong>hard-only</strong> 60–75 question set.
+      Your card is whatever difficulties you chose. If you want a fair fight, play a hard round or two before comparing.</div>
+      <div class="row" style="margin-top:16px"><button class="ghost" id="btnHome2">Home</button></div>`;
+
+    app.querySelector("#btnCard").addEventListener("click", () => {
+      S = { view: "results", profile: true, roundLen: S.roundLen, difficulty: S.difficulty, round: [], scope: "career", hist: Store.history(), probe: S.probe };
       renderResults();
-    } catch (e) { renderError("Couldn't load that card.", e); }
+    });
+    app.querySelector("#btnHome").addEventListener("click", goHome);
+    app.querySelector("#btnHome2").addEventListener("click", goHome);
   }
 
   // ====================================================================
@@ -1995,7 +2053,7 @@ const QUESTION_BANK = /*__BANK_START__*/[
   renderHome();
 
   // expose a tiny hook for the headless verification harness
-  window.__CAL__ = { API, playerId, startRound, renderLeaderboard, state: () => S };
+  window.__CAL__ = { Store, sample, startRound, renderCompare, state: () => S };
 })();
 </script>
 </body>
