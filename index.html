@@ -134,6 +134,7 @@
   .probe { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 14px; }
   .probe-sentence { font-size: 19px; margin: 0 0 10px; }
   .probe-sentence strong { font-variant-numeric: tabular-nums; }
+  .probe-caveat { font-size: 13px; margin: 2px 0 4px; min-height: 1.2em; }
   .probe input[type="range"] { width: 100%; accent-color: var(--accent); margin: 2px 0 10px; }
   .probe .seg button { font-size: 13px; padding: 7px 12px; }
   .probe .seg button.on { background: var(--panel-2); color: var(--ink); box-shadow: inset 0 0 0 2px currentColor; }
@@ -1634,7 +1635,8 @@ const AI_BASELINES = /*__AI_START__*/{
       <div class="card">
         <div class="probe">
           <p class="probe-sentence">So when you say you're <strong id="probeX">–</strong> confident,
-          you really mean <strong id="probeY">–</strong>.</p>
+          you <span id="probeVerb">really mean</span> <strong id="probeY">–</strong>.</p>
+          <p class="probe-caveat faint" id="probeCaveat"></p>
           <input type="range" id="probeSlider" min="25" max="99" step="1" value="${Math.round(S.probe.conf * 100)}"
             aria-label="Stated confidence to translate">
           <div class="seg" role="group" aria-label="Calibration method for the translator">
@@ -1700,6 +1702,7 @@ const AI_BASELINES = /*__AI_START__*/{
 
       <div class="row" style="margin-top:20px">
         <button class="primary" id="btnAgain">${profile ? "Start a round" : "Go again (" + S.roundLen + ")"} →</button>
+        ${profile ? "" : `<button class="ghost" id="btnVsAI">How did the AIs do? →</button>`}
         <button class="ghost" id="btnHome2">Home</button>
       </div>
       <p class="footer">Fits use your full career history (${careerN} answers).${profile ? "" : " The toggle above only changes which slice the table and curve summarize."}</p>`;
@@ -1729,6 +1732,33 @@ const AI_BASELINES = /*__AI_START__*/{
       lbl.setAttribute("text-anchor", flip ? "end" : "start");
       lbl.setAttribute("fill", color);
       lbl.textContent = Math.round(yv * 100) + "%";
+
+      // --- practice what we preach: the translated value is an estimate from
+      // however many answers landed at this confidence level. Hedge the verb
+      // and show the Wilson interval so we don't state a point estimate from
+      // two data points as if it were fact. ---
+      let nearestLvl = Calib.LIKERT[0];
+      for (const lv of Calib.LIKERT) if (Math.abs(lv - x) < Math.abs(nearestLvl - x)) nearestLvl = lv;
+      const at = active.filter((r) => Math.abs(r.conf - nearestLvl) < 1e-9);
+      const kAt = at.reduce((a, r) => a + (r.correct ? 1 : 0), 0);
+      const w = Calib.wilson(kAt, at.length);
+      const verbEl = qs("#probeVerb"), cavEl = qs("#probeCaveat");
+      if (verbEl && cavEl) {
+        const lvlPct = Math.round(nearestLvl * 100) + "%";
+        if (at.length === 0) {
+          verbEl.textContent = "have no track record, so a model can only guess";
+          cavEl.textContent = `You've logged 0 answers at ${lvlPct}. That number is pure extrapolation — don't trust it.`;
+        } else if (at.length < 5) {
+          verbEl.textContent = "might mean";
+          cavEl.innerHTML = `…but that's fit to just <strong>${at.length}</strong> answer${at.length === 1 ? "" : "s"} at ${lvlPct} (you got ${kAt} right). Your true rate there is anywhere in <strong>${Math.round(w.lo * 100)}–${Math.round(w.hi * 100)}%</strong> — barely evidence. Keep playing.`;
+        } else if (at.length < 15) {
+          verbEl.textContent = "probably mean";
+          cavEl.innerHTML = `Based on ${at.length} answers at ${lvlPct} (95% CI <strong>${Math.round(w.lo * 100)}–${Math.round(w.hi * 100)}%</strong>) — suggestive, not settled.`;
+        } else {
+          verbEl.textContent = "really mean";
+          cavEl.innerHTML = `Based on ${at.length} answers at ${lvlPct} (95% CI ${Math.round(w.lo * 100)}–${Math.round(w.hi * 100)}%).`;
+        }
+      }
 
       // --- keep the per-question review in sync with the chosen method ---
       // (profile mode has no round, so there's nothing to sync or jump to)
@@ -1785,6 +1815,8 @@ const AI_BASELINES = /*__AI_START__*/{
     app.querySelector("#btnHome2").addEventListener("click", goHome);
     const cmp = app.querySelector("#btnCompare");
     if (cmp) cmp.addEventListener("click", () => { S.profile = true; renderCompare(); });
+    const vs = app.querySelector("#btnVsAI");
+    if (vs) vs.addEventListener("click", () => { S.profile = true; renderCompare(); });
   }
 
   // Static markup only; the counterfactual value + method name + highlight are
@@ -1977,16 +2009,27 @@ const AI_BASELINES = /*__AI_START__*/{
     ];
     const stats = Object.fromEntries(players.map((pl) => [pl.key, statOf(pl.records)]));
 
-    // how many models is the player better-calibrated (lower ECE) than?
+    // How many models is the player nominally better-calibrated (lower ECE)
+    // than? Stated with heavy hedging — this is a point estimate off a small,
+    // difficulty-mismatched sample, exactly the thing the site warns against.
     const youEce = stats.you.ece;
     const beat = AI_ORDER.filter((k) => stats[k].ece > youEce).length;
     const g = stats.you.gap;
-    const dir = g > 0.05 ? "overconfident" : g < -0.05 ? "underconfident" : "well-calibrated";
+    const dir = g > 0.08 ? "running overconfident" : g < -0.08 ? "hedging (underconfident)" : "roughly on the diagonal";
+    const hist = Store.history();
+    const hardFrac = hist.length ? hist.filter((r) => r.diff === "hard").length / hist.length : 0;
+    const mismatch = hardFrac < 0.6
+      ? ` And it's apples-to-oranges: only ${Math.round(hardFrac * 100)}% of your answers were hard, vs their all-hard sets — play a few hard rounds for a fair fight.`
+      : "";
     let verdict;
-    if (you.length < 10) verdict = `You've only logged ${you.length} answer${you.length === 1 ? "" : "s"} — play more before challenging the machines; the comparison below is mostly error bars for now.`;
-    else if (beat === 3) verdict = `You are better calibrated than all three frontier models. The machines are uniformly underconfident; you, apparently, are not.`;
-    else if (beat === 0) verdict = `All three frontier models are better calibrated than you here — though note they're all underconfident, so this is a low bar you're limbo-ing under from the other side.`;
-    else verdict = `You are better calibrated (lower ECE) than ${beat} of 3 frontier models, and ${dir} overall. The machines all hedge below what they know; where do you land?`;
+    if (you.length < 25) {
+      verdict = `Too early to call. You've logged ${you.length} answer${you.length === 1 ? "" : "s"}; at this size the comparison below is mostly noise — the error bars on your dots will be enormous. Play ~25+ (ideally hard) before reading anything into it.${mismatch}`;
+    } else {
+      const rel = beat === 3 ? "lower than all three frontier models"
+        : beat === 0 ? "higher than all three frontier models"
+        : `lower than ${beat} of the three and higher than ${3 - beat}`;
+      verdict = `On these samples your ECE (${pct(youEce, 1)}) is nominally ${rel}, and you're ${dir}. But yours is n=${you.length} against their n=60–75, so treat this as a vibe check, not a verdict.${mismatch} The machines all hedge below what they know — the honest question is whether you do too.`;
+    }
 
     const cell = (st, key) => {
       if (key === "auroc") return st.auroc == null ? "—" : num(st.auroc, 3);
