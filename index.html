@@ -1351,7 +1351,9 @@ const AI_BASELINES = /*__AI_START__*/{
       </div>
       ${career}
       <p class="footer">Everything runs and stays in your browser — no server, no data leaves this page.
-      Questions from the Open Trivia Database (CC BY-SA 4.0) plus hand-written fills.</p>`;
+      Questions modified from the <a href="https://opentdb.com" target="_blank" rel="noopener">Open Trivia Database</a>
+      (<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>)
+      plus hand-written fills.</p>`;
 
     app.querySelectorAll("[data-len]").forEach((b) =>
       b.addEventListener("click", () => { S.roundLen = +b.dataset.len; renderHome(); }));

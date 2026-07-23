@@ -50,11 +50,23 @@ the statistics get more honest the more you play. Disclaimers scale down as your
 drink, words & language), roughly 30% easy / 40% medium / 30% hard. Difficulty
 spread is the point: overconfidence only reveals itself on hard questions.
 
-Questions are sourced from the [Open Trivia Database](https://opentdb.com)
-(licensed **CC BY-SA 4.0**), cleaned and rebalanced, plus hand-written fills for
-the thin categories and the genuinely-hard tier. The question bank in
-`index.html` is therefore also distributed under **CC BY-SA 4.0**; the code is
-MIT.
+A majority of the questions are **derived from and modified from** the
+[Open Trivia Database](https://opentdb.com), whose contributed questions are
+licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+— HTML-decoded, de-duplicated, filtered for time-drifting facts, rebalanced,
+answer-shuffled, and reformatted (full change list in
+[`LICENSE-questions.md`](LICENSE-questions.md)). The rest (~230 questions across
+food, words, and the hard tier) are hand-written.
+
+## Licensing
+
+- **Code** (`index.html` markup/CSS/JS, `calibration.js`, `mcp-server.mjs`,
+  `tools/`, tests) — [MIT](LICENSE).
+- **Question bank** (the embedded `QUESTION_BANK`) — a separate work under
+  [**CC BY-SA 4.0**](https://creativecommons.org/licenses/by-sa/4.0/), because it
+  derives from the Open Trivia Database. Attribution and the ShareAlike
+  obligation are documented in [`LICENSE-questions.md`](LICENSE-questions.md): if
+  you adapt the bank, you must share the adaptation under CC BY-SA 4.0 too.
 
 ## Tests
 
