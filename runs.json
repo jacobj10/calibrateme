@@ -1,0 +1,2242 @@
+[
+  {
+    "id": "4d255c831114",
+    "player": "foobar",
+    "playerType": "human",
+    "model": null,
+    "difficulty": "mixed",
+    "n": 10,
+    "ts": 1784333942842,
+    "persona": "TED-talk energy",
+    "metrics": {
+      "accuracy": 0.4,
+      "mean_confidence": 0.606,
+      "overconfidence_gap": 0.206,
+      "brier": 0.148,
+      "ece": 0.266,
+      "log_loss": 0.6654,
+      "auroc": 0.8958,
+      "murphy": {
+        "reliability": 0.073,
+        "resolution": 0.165,
+        "uncertainty": 0.24
+      }
+    },
+    "review": [
+      {
+        "question": "Which song by Swedish electronic musician Avicii samples the song \"Something's Got A Hold On Me\" by Etta James?",
+        "chosen": "Fade Into Darkness",
+        "correct_answer": "Levels",
+        "was_correct": false,
+        "stated_confidence": 0.25,
+        "category": "pop",
+        "difficulty": "medium"
+      },
+      {
+        "question": "What is the full meaning of RAM?",
+        "chosen": "Random Access Memory",
+        "correct_answer": "Random Access Memory",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "words",
+        "difficulty": "easy"
+      },
+      {
+        "question": "The Latin abbreviation 'i.e.' stands for a phrase meaning what?",
+        "chosen": "For example",
+        "correct_answer": "That is",
+        "was_correct": false,
+        "stated_confidence": 0.99,
+        "category": "words",
+        "difficulty": "medium"
+      },
+      {
+        "question": "When was the Prince album \"Purple Rain\" released?",
+        "chosen": "1981",
+        "correct_answer": "1984",
+        "was_correct": false,
+        "stated_confidence": 0.25,
+        "category": "pop",
+        "difficulty": "medium"
+      },
+      {
+        "question": "The Windows OS was delevoped by which company?",
+        "chosen": "Microsoft",
+        "correct_answer": "Microsoft",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "science",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Who is the primary lyricist for Canadian progressive rock band Rush?",
+        "chosen": "John Rutsey",
+        "correct_answer": "Neil Peart",
+        "was_correct": false,
+        "stated_confidence": 0.4,
+        "category": "pop",
+        "difficulty": "medium"
+      },
+      {
+        "question": "The Greek prefix 'tele-' means what?",
+        "chosen": "Far / distant",
+        "correct_answer": "Far / distant",
+        "was_correct": true,
+        "stated_confidence": 0.7,
+        "category": "words",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Who did Hippomenes defeat in a footrace?",
+        "chosen": "Peleus",
+        "correct_answer": "Atalanta",
+        "was_correct": false,
+        "stated_confidence": 0.25,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "An Ankh is the Egyptian Hieroglyph for what?",
+        "chosen": "Poison",
+        "correct_answer": "Life",
+        "was_correct": false,
+        "stated_confidence": 0.25,
+        "category": "arts",
+        "difficulty": "easy"
+      },
+      {
+        "question": "What is the main ingredient in traditional hummus?",
+        "chosen": "Chickpeas",
+        "correct_answer": "Chickpeas",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "food",
+        "difficulty": "easy"
+      }
+    ]
+  },
+  {
+    "id": "b877221e4a2c",
+    "player": "haiku-trio",
+    "playerType": "model",
+    "model": "claude-haiku",
+    "difficulty": "hard",
+    "n": 25,
+    "ts": 1784334029364,
+    "persona": "Endearingly modest",
+    "metrics": {
+      "accuracy": 0.92,
+      "mean_confidence": 0.7916,
+      "overconfidence_gap": -0.1284,
+      "brier": 0.0437,
+      "ece": 0.1788,
+      "log_loss": 0.2072,
+      "auroc": 1,
+      "murphy": {
+        "reliability": 0.0425,
+        "resolution": 0.0736,
+        "uncertainty": 0.0736
+      }
+    },
+    "review": [
+      {
+        "question": "What is Justin Bieber's debut Album?",
+        "chosen": "My World 2.0",
+        "correct_answer": "My World 2.0",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which Shakespeare play contains the line 'Bubble, bubble, toil and trouble'?",
+        "chosen": "None (the actual line is 'Double, double toil and trouble')",
+        "correct_answer": "None (the actual line is 'Double, double toil and trouble')",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which lyric is about Red Hot Chili Peppers frontman Anthony Kiedis?",
+        "chosen": "\"You used to be so warm and affectionate...but now you're quick to get into your regret\"",
+        "correct_answer": "\"A rainy Lithuanian / Is dancing as an Indian\"",
+        "was_correct": false,
+        "stated_confidence": 0.35,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these lakes is the largest by surface area?",
+        "chosen": "Caspian Sea",
+        "correct_answer": "Caspian Sea",
+        "was_correct": true,
+        "stated_confidence": 0.88,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Contrary to a widespread claim, the word 'golf' is NOT an acronym; it most likely derives from a medieval word meaning what?",
+        "chosen": "Club",
+        "correct_answer": "Club",
+        "was_correct": true,
+        "stated_confidence": 0.75,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "On the Beaufort Scale of wind force, what wind name is given to number 8?",
+        "chosen": "Gale",
+        "correct_answer": "Gale",
+        "was_correct": true,
+        "stated_confidence": 0.8,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The word 'avocado' derives, via Spanish, from an Aztec (Nahuatl) word for what?",
+        "chosen": "Testicle",
+        "correct_answer": "Testicle",
+        "was_correct": true,
+        "stated_confidence": 0.88,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the name of the town in which Lily and James Potter are buried?",
+        "chosen": "Godric's Hollow",
+        "correct_answer": "Godric's Hollow",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which part of the human tongue detects sweetness?",
+        "chosen": "All areas of the tongue",
+        "correct_answer": "All areas of the tongue",
+        "was_correct": true,
+        "stated_confidence": 0.89,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How many types of quarks are there in the standard model of physics?",
+        "chosen": "6",
+        "correct_answer": "6",
+        "was_correct": true,
+        "stated_confidence": 0.87,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the plane curve proposed by Descartes to challenge Fermat's extremum-finding techniques called?",
+        "chosen": "Folium of Descartes",
+        "correct_answer": "Folium of Descartes",
+        "was_correct": true,
+        "stated_confidence": 0.82,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What scientific family does the Aardwolf belong to?",
+        "chosen": "Hyaenidae",
+        "correct_answer": "Hyaenidae",
+        "was_correct": true,
+        "stated_confidence": 0.78,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What team did England beat in the semi-final stage to win in the 1966 World Cup final?",
+        "chosen": "Portugal",
+        "correct_answer": "Portugal",
+        "was_correct": true,
+        "stated_confidence": 0.8,
+        "category": "sports",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The painting \"Guernica\" by Pablo Picasso expressed emotions of dread in response to which war?",
+        "chosen": "Spanish Civil War",
+        "correct_answer": "Spanish Civil War",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these countries is entirely within the Southern Hemisphere?",
+        "chosen": "Australia",
+        "correct_answer": "Australia",
+        "was_correct": true,
+        "stated_confidence": 0.93,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How many stations does the Central Line have on the London Underground?",
+        "chosen": "49",
+        "correct_answer": "49",
+        "was_correct": true,
+        "stated_confidence": 0.5,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Abel Magwitch is a character from which Charles Dickens novel?",
+        "chosen": "Great Expectations",
+        "correct_answer": "Great Expectations",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these deserts is the largest by area?",
+        "chosen": "Antarctic Desert",
+        "correct_answer": "Antarctic Desert",
+        "was_correct": true,
+        "stated_confidence": 0.6,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Saffron's high cost is because each flower produces only how many usable stigmas?",
+        "chosen": "Three",
+        "correct_answer": "Three",
+        "was_correct": true,
+        "stated_confidence": 0.88,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the name given to layer 4 of the Open Systems Interconnection (ISO) model?",
+        "chosen": "Transport",
+        "correct_answer": "Transport",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In Star Trek, what is the exact phrase used to command the ship forward?",
+        "chosen": "'Engage'",
+        "correct_answer": "'Engage'",
+        "was_correct": true,
+        "stated_confidence": 0.78,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the largest city and commercial capital of Sri Lanka?",
+        "chosen": "Colombo",
+        "correct_answer": "Colombo",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The original Caesar salad is credited to a restaurateur in which city?",
+        "chosen": "Tijuana, Mexico",
+        "correct_answer": "Tijuana, Mexico",
+        "was_correct": true,
+        "stated_confidence": 0.82,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of the following physicists did NOT work on the Manhattan project?",
+        "chosen": "Murray Gell-Mann",
+        "correct_answer": "Murray Gell-Mann",
+        "was_correct": true,
+        "stated_confidence": 0.8,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who played the sun baby in the original run of Teletubbies?",
+        "chosen": "Lisa Brockwell",
+        "correct_answer": "Jessica Smith",
+        "was_correct": false,
+        "stated_confidence": 0.28,
+        "category": "pop",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "id": "8ba644c4fc3c",
+    "player": "haiku-trio",
+    "playerType": "model",
+    "model": "claude-haiku",
+    "difficulty": "hard",
+    "n": 25,
+    "ts": 1784334032154,
+    "persona": "Endearingly modest",
+    "metrics": {
+      "accuracy": 1,
+      "mean_confidence": 0.8604,
+      "overconfidence_gap": -0.1396,
+      "brier": 0.0318,
+      "ece": 0.1396,
+      "log_loss": 0.1596,
+      "auroc": null,
+      "murphy": {
+        "reliability": 0.0307,
+        "resolution": 0,
+        "uncertainty": 0
+      }
+    },
+    "review": [
+      {
+        "question": "Nidhogg is a mythical creature from what mythology?",
+        "chosen": "Norse",
+        "correct_answer": "Norse",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the English title of the vaporwave track \"リサフランク420 / 現代のコンピュー\" by Macintosh Plus (Vektroid)?",
+        "chosen": "Lisa Frank 420 / Modern Computing",
+        "correct_answer": "Lisa Frank 420 / Modern Computing",
+        "was_correct": true,
+        "stated_confidence": 0.78,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the largest city and commercial capital of Sri Lanka?",
+        "chosen": "Colombo",
+        "correct_answer": "Colombo",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who succeeded Julius Caesar as the first Roman Emperor?",
+        "chosen": "Augustus (Octavian)",
+        "correct_answer": "Augustus (Octavian)",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "On 'Sesame Street,' what is the real first name of the character Big Bird's friend commonly called Mr. Snuffleupagus?",
+        "chosen": "Aloysius",
+        "correct_answer": "Aloysius",
+        "was_correct": true,
+        "stated_confidence": 0.75,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who was the reigning British monarch when the Wright brothers made the first powered flight in 1903?",
+        "chosen": "Edward VII",
+        "correct_answer": "Edward VII",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which author co-wrote \"The Communist Manifesto\" alongside Karl Marx?",
+        "chosen": "Friedrich Engels",
+        "correct_answer": "Friedrich Engels",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the scientific name of the Budgerigar?",
+        "chosen": "Melopsittacus undulatus",
+        "correct_answer": "Melopsittacus undulatus",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In the Harry Potter universe, what is Cornelius Fudge's middle name?",
+        "chosen": "Oswald",
+        "correct_answer": "Oswald",
+        "was_correct": true,
+        "stated_confidence": 0.72,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Many people think 'peruse' means to skim; its traditional and preferred meaning is actually what?",
+        "chosen": "To read thoroughly / carefully",
+        "correct_answer": "To read thoroughly / carefully",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What was Napoleon Bonaparte's name before he changed it?",
+        "chosen": "Napoleone di Buonaparte",
+        "correct_answer": "Napoleone di Buonaparte",
+        "was_correct": true,
+        "stated_confidence": 0.88,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In the 'Snow White' Disney film, what does the Queen actually say to her mirror?",
+        "chosen": "'Magic mirror on the wall'",
+        "correct_answer": "'Magic mirror on the wall'",
+        "was_correct": true,
+        "stated_confidence": 0.8,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which author wrote 'The Adventures of Sherlock Holmes'?",
+        "chosen": "Arthur Conan Doyle",
+        "correct_answer": "Arthur Conan Doyle",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the molecular formula of Glucose?",
+        "chosen": "C6H12O6",
+        "correct_answer": "C6H12O6",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In the show 'Doctor Who', what is the name of the time-capsule model stolen by 'the Doctor'?",
+        "chosen": "TT Type 40, Mark 3 (TARDIS)",
+        "correct_answer": "TT Type 40, Mark 3 (TARDIS)",
+        "was_correct": true,
+        "stated_confidence": 0.68,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which day did World War I begin?",
+        "chosen": "July 28",
+        "correct_answer": "July 28",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the scientific name of the cheetah?",
+        "chosen": "Acinonyx jubatus",
+        "correct_answer": "Acinonyx jubatus",
+        "was_correct": true,
+        "stated_confidence": 0.88,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In Canadian football, scoring a rouge is worth how many points?",
+        "chosen": "1",
+        "correct_answer": "1",
+        "was_correct": true,
+        "stated_confidence": 0.8,
+        "category": "sports",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Cleopatra lived closer in time to which of the following?",
+        "chosen": "The Moon landing",
+        "correct_answer": "The Moon landing",
+        "was_correct": true,
+        "stated_confidence": 0.82,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which river was dammed to create Gatun Lake and the Panama Canal?",
+        "chosen": "Chagres River",
+        "correct_answer": "Chagres River",
+        "was_correct": true,
+        "stated_confidence": 0.83,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In addition to his career as an astrologer and \"prophet\", Nostradamus published a 1555 treatise that included a section on what?",
+        "chosen": "Making jams and jellies",
+        "correct_answer": "Making jams and jellies",
+        "was_correct": true,
+        "stated_confidence": 0.55,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which artist cut off part of his own ear?",
+        "chosen": "Vincent van Gogh",
+        "correct_answer": "Vincent van Gogh",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What was the punishment for Sysiphus's craftiness?",
+        "chosen": "Cursed to roll a boulder up a hill for eternity.",
+        "correct_answer": "Cursed to roll a boulder up a hill for eternity.",
+        "was_correct": true,
+        "stated_confidence": 0.96,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which member of the English band \"The xx\" released their solo album \"In Colour\" in 2015?",
+        "chosen": "Jamie xx",
+        "correct_answer": "Jamie xx",
+        "was_correct": true,
+        "stated_confidence": 0.75,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which city features all of their professional sports teams' jersey's with the same color scheme?",
+        "chosen": "Pittsburgh",
+        "correct_answer": "Pittsburgh",
+        "was_correct": true,
+        "stated_confidence": 0.88,
+        "category": "sports",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "id": "902580fea16b",
+    "player": "haiku-trio",
+    "playerType": "model",
+    "model": "claude-haiku",
+    "difficulty": "hard",
+    "n": 25,
+    "ts": 1784334054760,
+    "persona": "Endearingly modest",
+    "metrics": {
+      "accuracy": 0.92,
+      "mean_confidence": 0.7824,
+      "overconfidence_gap": -0.1376,
+      "brier": 0.0814,
+      "ece": 0.1376,
+      "log_loss": 0.2817,
+      "auroc": 0.913,
+      "murphy": {
+        "reliability": 0.0308,
+        "resolution": 0.0169,
+        "uncertainty": 0.0736
+      }
+    },
+    "review": [
+      {
+        "question": "Which lyric is about Red Hot Chili Peppers frontman Anthony Kiedis?",
+        "chosen": "\"A rainy Lithuanian / Is dancing as an Indian\"",
+        "correct_answer": "\"A rainy Lithuanian / Is dancing as an Indian\"",
+        "was_correct": true,
+        "stated_confidence": 0.4,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Neil Armstrong's famous moon line as commonly quoted is 'One small step for man'; the widely cited grammatical intent was that he meant to say what?",
+        "chosen": "One small step for a man",
+        "correct_answer": "One small step for a man",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which horizon in a soil profile consists of bedrock?",
+        "chosen": "R",
+        "correct_answer": "R",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which Australian Prime Minister disappeared in 1967 and was never found?",
+        "chosen": "Harold Holt",
+        "correct_answer": "Harold Holt",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which spice comes from the aril (lacy covering) surrounding the nutmeg seed?",
+        "chosen": "Mace",
+        "correct_answer": "Mace",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which African country has the largest population?",
+        "chosen": "Nigeria",
+        "correct_answer": "Nigeria",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The ontological argument for the proof of God's existence is first attributed to whom?",
+        "chosen": "Anselm of Canterbury",
+        "correct_answer": "Anselm of Canterbury",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The Scoville scale measures the concentration of which compound in chili peppers?",
+        "chosen": "Capsaicin",
+        "correct_answer": "Capsaicin",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In the book \"The Martian\", how long was Mark Watney trapped on Mars (in Sols)?",
+        "chosen": "549 Days",
+        "correct_answer": "549 Days",
+        "was_correct": true,
+        "stated_confidence": 0.6,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What year was the Mona Lisa finished?",
+        "chosen": "1511",
+        "correct_answer": "1504",
+        "was_correct": false,
+        "stated_confidence": 0.65,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Originally another word for poppy, coquelicot is a shade of what?",
+        "chosen": "Red",
+        "correct_answer": "Red",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How much radiation does a banana emit?",
+        "chosen": "0.1 Microsievert",
+        "correct_answer": "0.1 Microsievert",
+        "was_correct": true,
+        "stated_confidence": 0.75,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these South American capitals lies farthest west?",
+        "chosen": "Lima, Peru",
+        "correct_answer": "Lima, Peru",
+        "was_correct": true,
+        "stated_confidence": 0.6,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In Dante's 'Inferno,' how many circles of Hell are there?",
+        "chosen": "Nine",
+        "correct_answer": "Nine",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "After the 1516 Battle of Marj Dabiq, the Ottoman Empire took control of Jerusalem from which sultanate?",
+        "chosen": "Mamluk",
+        "correct_answer": "Mamluk",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of the following Inuit languages was the FIRST to use a unique writing system not based on the Latin alphabet?",
+        "chosen": "Inuktitut",
+        "correct_answer": "Inuktitut",
+        "was_correct": true,
+        "stated_confidence": 0.7,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How many sonatas did Ludwig van Beethoven write?",
+        "chosen": "32",
+        "correct_answer": "32",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who scored the injury time winning goal in the 1999 UEFA Champions League final between Manchester United and Bayern Munich?",
+        "chosen": "Ole Gunnar Solskjær",
+        "correct_answer": "Ole Gunnar Solskjær",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "sports",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is considered the rarest form of color blindness?",
+        "chosen": "Blue",
+        "correct_answer": "Blue",
+        "was_correct": true,
+        "stated_confidence": 0.7,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What does the scientific name of the Cambrian-Period sea creature Anomalocaris mean?",
+        "chosen": "Abnormal Shrimp",
+        "correct_answer": "Abnormal Shrimp",
+        "was_correct": true,
+        "stated_confidence": 0.8,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In the TV Show \"Donkey Kong Country\", which episode did the song \"Eddie, Let Me Go Back To My Home\" play in?",
+        "chosen": "Ape-Nesia",
+        "correct_answer": "It's a Wonderful Life",
+        "was_correct": false,
+        "stated_confidence": 0.35,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these empires existed most recently?",
+        "chosen": "Ottoman Empire",
+        "correct_answer": "Ottoman Empire",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the romanized Chinese word for \"airplane\"?",
+        "chosen": "Feiji",
+        "correct_answer": "Feiji",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these voices wasn't a choice for the House AI in \"The Simpsons Treehouse of Horror\" short, House of Whacks?",
+        "chosen": "George Clooney",
+        "correct_answer": "George Clooney",
+        "was_correct": true,
+        "stated_confidence": 0.4,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The original Caesar salad is credited to a restaurateur in which city?",
+        "chosen": "Tijuana, Mexico",
+        "correct_answer": "Tijuana, Mexico",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "food",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "id": "2c727d52e37b",
+    "player": "fable-trio",
+    "playerType": "model",
+    "model": "claude-fable",
+    "difficulty": "hard",
+    "n": 20,
+    "ts": 1784334397930,
+    "persona": "Endearingly modest",
+    "metrics": {
+      "accuracy": 1,
+      "mean_confidence": 0.9175,
+      "overconfidence_gap": -0.0825,
+      "brier": 0.015,
+      "ece": 0.0825,
+      "log_loss": 0.0916,
+      "auroc": null,
+      "murphy": {
+        "reliability": 0.0147,
+        "resolution": 0,
+        "uncertainty": 0
+      }
+    },
+    "review": [
+      {
+        "question": "Which of these countries is entirely within the Southern Hemisphere?",
+        "chosen": "Australia",
+        "correct_answer": "Australia",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The famous line from Shakespeare's 'Hamlet' is 'The lady doth protest too much,' followed by which word?",
+        "chosen": "Methinks",
+        "correct_answer": "Methinks",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who was the President of the United States during the signing of the Gadsden Purchase?",
+        "chosen": "Franklin Pierce",
+        "correct_answer": "Franklin Pierce",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What was the first recorded object to ever reach space?",
+        "chosen": "Bumper-WAC",
+        "correct_answer": "Bumper-WAC",
+        "was_correct": true,
+        "stated_confidence": 0.7,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which is not a type of neuron?",
+        "chosen": "Perceptual Neuron",
+        "correct_answer": "Perceptual Neuron",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Santorini is an island belonging to what European Country?",
+        "chosen": "Greece",
+        "correct_answer": "Greece",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "All of the following human genetic haplogroup names are shared between Y-chromosome and mitochondrial DNA haplogroups EXCEPT:",
+        "chosen": "Haplogroup U",
+        "correct_answer": "Haplogroup U",
+        "was_correct": true,
+        "stated_confidence": 0.75,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How many countries share a land border with Russia? (Not including disputed territories)",
+        "chosen": "14",
+        "correct_answer": "14",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How many islands does Kuwait have?",
+        "chosen": "9",
+        "correct_answer": "9",
+        "was_correct": true,
+        "stated_confidence": 0.7,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The Scoville scale measures the concentration of which compound in chili peppers?",
+        "chosen": "Capsaicin",
+        "correct_answer": "Capsaicin",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The original literal meaning of the word 'clue' referred to what?",
+        "chosen": "A ball of thread",
+        "correct_answer": "A ball of thread",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The Suez Canal is located in which African country?",
+        "chosen": "Egypt",
+        "correct_answer": "Egypt",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Painter Piet Mondrian (1872 - 1944) was a part of what movement?",
+        "chosen": "Neoplasticism",
+        "correct_answer": "Neoplasticism",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What causes the seasons on Earth?",
+        "chosen": "The tilt of Earth's axis",
+        "correct_answer": "The tilt of Earth's axis",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Van Gogh sold approximately how many paintings during his lifetime?",
+        "chosen": "Very few (commonly cited as one)",
+        "correct_answer": "Very few (commonly cited as one)",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which Beatle actually played the drums on several tracks, including 'Back in the U.S.S.R.,' when Ringo Starr had temporarily quit?",
+        "chosen": "Paul McCartney",
+        "correct_answer": "Paul McCartney",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The 'holes' in Swiss Emmental cheese are formed by what?",
+        "chosen": "Carbon dioxide from bacteria",
+        "correct_answer": "Carbon dioxide from bacteria",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which consumer music product was released to the public first?",
+        "chosen": "The Sony Walkman cassette player",
+        "correct_answer": "The Sony Walkman cassette player",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who painted \"American Gothic\"?",
+        "chosen": "Grant Wood",
+        "correct_answer": "Grant Wood",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the Finnish word for \"Finland\"?",
+        "chosen": "Suomi",
+        "correct_answer": "Suomi",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "geography",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "id": "5981a56a1d2c",
+    "player": "fable-trio",
+    "playerType": "model",
+    "model": "claude-fable",
+    "difficulty": "hard",
+    "n": 20,
+    "ts": 1784334437830,
+    "persona": "Endearingly modest",
+    "metrics": {
+      "accuracy": 1,
+      "mean_confidence": 0.9435,
+      "overconfidence_gap": -0.0565,
+      "brier": 0.0058,
+      "ece": 0.0565,
+      "log_loss": 0.0597,
+      "auroc": null,
+      "murphy": {
+        "reliability": 0.0054,
+        "resolution": 0,
+        "uncertainty": 0
+      }
+    },
+    "review": [
+      {
+        "question": "In addition to his career as an astrologer and \"prophet\", Nostradamus published a 1555 treatise that included a section on what?",
+        "chosen": "Making jams and jellies",
+        "correct_answer": "Making jams and jellies",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How long is a light-year?",
+        "chosen": "9.461 Trillion Kilometres",
+        "correct_answer": "9.461 Trillion Kilometres",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The Panama Canal's Pacific entrance is on which side relative to its Atlantic entrance?",
+        "chosen": "East",
+        "correct_answer": "East",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the species of the \"Predator\" in the 1987 movie \"Predator\"?",
+        "chosen": "Yautja",
+        "correct_answer": "Yautja",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The word 'companion' derives from Latin roots meaning literally what?",
+        "chosen": "One who shares bread with you",
+        "correct_answer": "One who shares bread with you",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In the 'Snow White' Disney film, what does the Queen actually say to her mirror?",
+        "chosen": "'Magic mirror on the wall'",
+        "correct_answer": "'Magic mirror on the wall'",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these voices wasn't a choice for the House AI in \"The Simpsons Treehouse of Horror\" short, House of Whacks?",
+        "chosen": "George Clooney",
+        "correct_answer": "George Clooney",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which player \"kung-fu kicked\" a Crystal Palace fan in January 1995?",
+        "chosen": "Eric Cantona",
+        "correct_answer": "Eric Cantona",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "sports",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which horizon in a soil profile consists of bedrock?",
+        "chosen": "R",
+        "correct_answer": "R",
+        "was_correct": true,
+        "stated_confidence": 0.96,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the English title of the vaporwave track \"リサフランク420 / 現代のコンピュー\" by Macintosh Plus (Vektroid)?",
+        "chosen": "Lisa Frank 420 / Modern Computing",
+        "correct_answer": "Lisa Frank 420 / Modern Computing",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which movie did NOT feature the late actor John Candy?",
+        "chosen": "Ghostbusters",
+        "correct_answer": "Ghostbusters",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What causes the sound of a heartbeat?",
+        "chosen": "Closure of the heart valves",
+        "correct_answer": "Closure of the heart valves",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What was the first recorded object to ever reach space?",
+        "chosen": "Bumper-WAC",
+        "correct_answer": "Bumper-WAC",
+        "was_correct": true,
+        "stated_confidence": 0.8,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In Dante's 'Inferno,' how many circles of Hell are there?",
+        "chosen": "Nine",
+        "correct_answer": "Nine",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these US states extends farthest south?",
+        "chosen": "Hawaii",
+        "correct_answer": "Hawaii",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What does the scientific name of the Cambrian-Period sea creature Anomalocaris mean?",
+        "chosen": "Abnormal Shrimp",
+        "correct_answer": "Abnormal Shrimp",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these in the Star Trek series is NOT Klingon food?",
+        "chosen": "Hors d'oeuvre",
+        "correct_answer": "Hors d'oeuvre",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What was the name of the spy ring that helped the United States win the Revolutionary War?",
+        "chosen": "Culper Ring",
+        "correct_answer": "Culper Ring",
+        "was_correct": true,
+        "stated_confidence": 0.96,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "When was Salvador Dali's painting, \"The Persistence of Memory,\" completed?",
+        "chosen": "1931",
+        "correct_answer": "1931",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In Star Trek, what is the exact phrase used to command the ship forward?",
+        "chosen": "'Engage'",
+        "correct_answer": "'Engage'",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "pop",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "id": "9db22cb4aaa2",
+    "player": "fable-trio",
+    "playerType": "model",
+    "model": "claude-fable",
+    "difficulty": "hard",
+    "n": 20,
+    "ts": 1784334448481,
+    "persona": "Endearingly modest",
+    "metrics": {
+      "accuracy": 1,
+      "mean_confidence": 0.93,
+      "overconfidence_gap": -0.07,
+      "brier": 0.0094,
+      "ece": 0.07,
+      "log_loss": 0.0755,
+      "auroc": null,
+      "murphy": {
+        "reliability": 0.0088,
+        "resolution": 0,
+        "uncertainty": 0
+      }
+    },
+    "review": [
+      {
+        "question": "Which war was fought first?",
+        "chosen": "The Spanish-American War",
+        "correct_answer": "The Spanish-American War",
+        "was_correct": true,
+        "stated_confidence": 0.96,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What color is the Sun when viewed from space, without an atmosphere?",
+        "chosen": "White",
+        "correct_answer": "White",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which is the southernmost independent country in Africa?",
+        "chosen": "South Africa",
+        "correct_answer": "South Africa",
+        "was_correct": true,
+        "stated_confidence": 0.96,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which actor did NOT play James Bond in an official EON-produced film?",
+        "chosen": "David Niven",
+        "correct_answer": "David Niven",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these cities lies farthest east?",
+        "chosen": "Santiago, Chile",
+        "correct_answer": "Santiago, Chile",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which movie did NOT feature the late actor John Candy?",
+        "chosen": "Ghostbusters",
+        "correct_answer": "Ghostbusters",
+        "was_correct": true,
+        "stated_confidence": 0.93,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who was the first man to travel into outer space?",
+        "chosen": "Yuri Gagarin",
+        "correct_answer": "Yuri Gagarin",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which artist cut off part of his own ear?",
+        "chosen": "Vincent van Gogh",
+        "correct_answer": "Vincent van Gogh",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The champagne production method requires a second fermentation to occur where?",
+        "chosen": "In the bottle",
+        "correct_answer": "In the bottle",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the average amount of chinchillas born into a single litter?",
+        "chosen": "2-3",
+        "correct_answer": "2-3",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Goldfish memory span is best described as which of the following?",
+        "chosen": "Months",
+        "correct_answer": "Months",
+        "was_correct": true,
+        "stated_confidence": 0.93,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In the show 'Doctor Who', what is the name of the time-capsule model stolen by 'the Doctor'?",
+        "chosen": "TT Type 40, Mark 3 (TARDIS)",
+        "correct_answer": "TT Type 40, Mark 3 (TARDIS)",
+        "was_correct": true,
+        "stated_confidence": 0.7,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of the following Inuit languages was the FIRST to use a unique writing system not based on the Latin alphabet?",
+        "chosen": "Inuktitut",
+        "correct_answer": "Inuktitut",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The word 'disaster' comes from roots literally meaning what?",
+        "chosen": "Bad star",
+        "correct_answer": "Bad star",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How many countries share a land border with Russia? (Not including disputed territories)",
+        "chosen": "14",
+        "correct_answer": "14",
+        "was_correct": true,
+        "stated_confidence": 0.94,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who played the sun baby in the original run of Teletubbies?",
+        "chosen": "Jessica Smith",
+        "correct_answer": "Jessica Smith",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The word 'avocado' derives, via Spanish, from an Aztec (Nahuatl) word for what?",
+        "chosen": "Testicle",
+        "correct_answer": "Testicle",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Frankenstein, in Mary Shelley's novel, is the name of which character?",
+        "chosen": "The scientist",
+        "correct_answer": "The scientist",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who is a minor god that is protector and creator of various arts, such as cheese making and bee keeping.",
+        "chosen": "Aristaeus",
+        "correct_answer": "Aristaeus",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Long John Baldry, the voice of Dr. Robotnik in Adventures Of Sonic The Hedgehog, was in a band with which music artist in the 1960s?",
+        "chosen": "Elton John",
+        "correct_answer": "Elton John",
+        "was_correct": true,
+        "stated_confidence": 0.93,
+        "category": "pop",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "id": "fd64541c210a",
+    "player": "opus-trio",
+    "playerType": "model",
+    "model": "claude-opus",
+    "difficulty": "hard",
+    "n": 25,
+    "ts": 1784828631391,
+    "persona": "Endearingly modest",
+    "metrics": {
+      "accuracy": 0.96,
+      "mean_confidence": 0.878,
+      "overconfidence_gap": -0.082,
+      "brier": 0.0421,
+      "ece": 0.082,
+      "log_loss": 0.1725,
+      "auroc": 0.9375,
+      "murphy": {
+        "reliability": 0.0136,
+        "resolution": 0.0084,
+        "uncertainty": 0.0384
+      }
+    },
+    "review": [
+      {
+        "question": "Which of these cities lies farthest east?",
+        "chosen": "Santiago, Chile",
+        "correct_answer": "Santiago, Chile",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What was the first superhero film James Gunn was involved with?",
+        "chosen": "The Specials",
+        "correct_answer": "The Specials",
+        "was_correct": true,
+        "stated_confidence": 0.7,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is Ron Weasley's middle name?",
+        "chosen": "Bilius",
+        "correct_answer": "Bilius",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these South American capitals lies farthest west?",
+        "chosen": "Quito, Ecuador",
+        "correct_answer": "Lima, Peru",
+        "was_correct": false,
+        "stated_confidence": 0.7,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Etihad Stadium is the home stadium for which team?",
+        "chosen": "Manchester City",
+        "correct_answer": "Manchester City",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "sports",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In Margaret Atwood's \"The Handmaid's Tale\", what is Offred's real name is implied to be?",
+        "chosen": "June",
+        "correct_answer": "June",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What color is the Sun when viewed from space, without an atmosphere?",
+        "chosen": "White",
+        "correct_answer": "White",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "According to Algonquian folklore, how does one transform into a Wendigo?",
+        "chosen": "Participating in cannibalism.",
+        "correct_answer": "Participating in cannibalism.",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What tool lends it's name to a last-stone advantage in an end in Curling?",
+        "chosen": "Hammer",
+        "correct_answer": "Hammer",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "sports",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the Finnish word for \"Finland\"?",
+        "chosen": "Suomi",
+        "correct_answer": "Suomi",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "\"The Big Bang Theory\" was first theorized by a priest of what religious ideology?",
+        "chosen": "Catholic",
+        "correct_answer": "Catholic",
+        "was_correct": true,
+        "stated_confidence": 0.75,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The Scoville scale measures the concentration of which compound in chili peppers?",
+        "chosen": "Capsaicin",
+        "correct_answer": "Capsaicin",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The champagne production method requires a second fermentation to occur where?",
+        "chosen": "In the bottle",
+        "correct_answer": "In the bottle",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In 1547 who became the 1st Tsar of Russia",
+        "chosen": "Ivan the Terrible",
+        "correct_answer": "Ivan the Terrible",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which country is completely landlocked by South Africa?",
+        "chosen": "Lesotho",
+        "correct_answer": "Lesotho",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these deserts is the largest by area?",
+        "chosen": "Antarctic Desert",
+        "correct_answer": "Antarctic Desert",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Lightning strikes the same place twice how often?",
+        "chosen": "Often (tall structures are hit repeatedly)",
+        "correct_answer": "Often (tall structures are hit repeatedly)",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who was the President of the United States during the signing of the Gadsden Purchase?",
+        "chosen": "Franklin Pierce",
+        "correct_answer": "Franklin Pierce",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What did the abbreviation \"RMS\" stand for in the RMS Titanic in 1912?",
+        "chosen": "Royal Mail Ship",
+        "correct_answer": "Royal Mail Ship",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these countries is NOT the only country to start with that letter of the alphabet?",
+        "chosen": "Zambia",
+        "correct_answer": "Zambia",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these European cities was the first to host the modern Summer Olympic Games three times?",
+        "chosen": "London",
+        "correct_answer": "London",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "sports",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How much radiation does a banana emit?",
+        "chosen": "0.1 Microsievert",
+        "correct_answer": "0.1 Microsievert",
+        "was_correct": true,
+        "stated_confidence": 0.75,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is special about Lake Titicaca?",
+        "chosen": "Highest navigable lake",
+        "correct_answer": "Highest navigable lake",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The Panama Canal's Pacific entrance is on which side relative to its Atlantic entrance?",
+        "chosen": "East",
+        "correct_answer": "East",
+        "was_correct": true,
+        "stated_confidence": 0.55,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The 'holes' in Swiss Emmental cheese are formed by what?",
+        "chosen": "Carbon dioxide from bacteria",
+        "correct_answer": "Carbon dioxide from bacteria",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "food",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "id": "6144fa597dc0",
+    "player": "opus-trio",
+    "playerType": "model",
+    "model": "claude-opus",
+    "difficulty": "hard",
+    "n": 25,
+    "ts": 1784828638978,
+    "persona": "Endearingly modest",
+    "metrics": {
+      "accuracy": 1,
+      "mean_confidence": 0.8692,
+      "overconfidence_gap": -0.1308,
+      "brier": 0.0314,
+      "ece": 0.1308,
+      "log_loss": 0.1516,
+      "auroc": null,
+      "murphy": {
+        "reliability": 0.0301,
+        "resolution": 0,
+        "uncertainty": 0
+      }
+    },
+    "review": [
+      {
+        "question": "Cleopatra lived closer in time to which of the following?",
+        "chosen": "The Moon landing",
+        "correct_answer": "The Moon landing",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The Second Boer War in 1899 was fought where?",
+        "chosen": "South Africa",
+        "correct_answer": "South Africa",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The 'holes' in Swiss Emmental cheese are formed by what?",
+        "chosen": "Carbon dioxide from bacteria",
+        "correct_answer": "Carbon dioxide from bacteria",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which country is the northernmost point of the continent of Africa located in?",
+        "chosen": "Tunisia",
+        "correct_answer": "Tunisia",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What was the first superhero film James Gunn was involved with?",
+        "chosen": "The Specials",
+        "correct_answer": "The Specials",
+        "was_correct": true,
+        "stated_confidence": 0.78,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "\"The Big Bang Theory\" was first theorized by a priest of what religious ideology?",
+        "chosen": "Catholic",
+        "correct_answer": "Catholic",
+        "was_correct": true,
+        "stated_confidence": 0.8,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What causes the seasons on Earth?",
+        "chosen": "The tilt of Earth's axis",
+        "correct_answer": "The tilt of Earth's axis",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Reno, Nevada lies farther west than which of these California cities?",
+        "chosen": "Los Angeles",
+        "correct_answer": "Los Angeles",
+        "was_correct": true,
+        "stated_confidence": 0.6,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which female player won the gold medal of table tennis singles in 2016 Olympics Games?",
+        "chosen": "DING Ning (China)",
+        "correct_answer": "DING Ning (China)",
+        "was_correct": true,
+        "stated_confidence": 0.82,
+        "category": "sports",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the world's smallest country by population?",
+        "chosen": "Vatican City",
+        "correct_answer": "Vatican City",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these lakes is the largest by surface area?",
+        "chosen": "Caspian Sea",
+        "correct_answer": "Caspian Sea",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Frankenstein, in Mary Shelley's novel, is the name of which character?",
+        "chosen": "The scientist",
+        "correct_answer": "The scientist",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these is not an additional variation of the color purple?",
+        "chosen": "Kobicha",
+        "correct_answer": "Kobicha",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which is Kenesisa Bekele's personal best at marathon?",
+        "chosen": "2:01:41",
+        "correct_answer": "2:01:41",
+        "was_correct": true,
+        "stated_confidence": 0.78,
+        "category": "sports",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The word 'sarcasm' comes from a Greek verb literally meaning what?",
+        "chosen": "To tear flesh",
+        "correct_answer": "To tear flesh",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "words",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Where was the Games of the XXII Olympiad held?",
+        "chosen": "Moscow",
+        "correct_answer": "Moscow",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "sports",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In the original 'Star Wars,' what is the exact line Darth Vader says about Luke's father?",
+        "chosen": "'No, I am your father'",
+        "correct_answer": "'No, I am your father'",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which country has the most time zones (including its overseas territories)?",
+        "chosen": "France",
+        "correct_answer": "France",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What common name is given to the medial condition, tibial stress syndrome (MTSS)?",
+        "chosen": "Shin Splints",
+        "correct_answer": "Shin Splints",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What did the abbreviation \"RMS\" stand for in the RMS Titanic in 1912?",
+        "chosen": "Royal Mail Ship",
+        "correct_answer": "Royal Mail Ship",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In The Lies Of Locke Lamora, what does \"Lamora\" mean in Throne Therin?",
+        "chosen": "Shadow",
+        "correct_answer": "Shadow",
+        "was_correct": true,
+        "stated_confidence": 0.5,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Into which basin does the Jordan River flow into?",
+        "chosen": "Dead Sea",
+        "correct_answer": "Dead Sea",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is Justin Bieber's debut Album?",
+        "chosen": "My World 2.0",
+        "correct_answer": "My World 2.0",
+        "was_correct": true,
+        "stated_confidence": 0.72,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In which century did the first fax machine technology get patented?",
+        "chosen": "19th century (1843)",
+        "correct_answer": "19th century (1843)",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Who is Manchester United's leading appearance maker?",
+        "chosen": "Ryan Giggs",
+        "correct_answer": "Ryan Giggs",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "sports",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "id": "6c92a68cd244",
+    "player": "opus-trio",
+    "playerType": "model",
+    "model": "claude-opus",
+    "difficulty": "hard",
+    "n": 25,
+    "ts": 1784828639436,
+    "persona": "Endearingly modest",
+    "metrics": {
+      "accuracy": 1,
+      "mean_confidence": 0.8736,
+      "overconfidence_gap": -0.1264,
+      "brier": 0.0333,
+      "ece": 0.1264,
+      "log_loss": 0.1488,
+      "auroc": null,
+      "murphy": {
+        "reliability": 0.0326,
+        "resolution": 0,
+        "uncertainty": 0
+      }
+    },
+    "review": [
+      {
+        "question": "How many islands does Kuwait have?",
+        "chosen": "9",
+        "correct_answer": "9",
+        "was_correct": true,
+        "stated_confidence": 0.8,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of the following is NOT a real element?",
+        "chosen": "Vitrainium",
+        "correct_answer": "Vitrainium",
+        "was_correct": true,
+        "stated_confidence": 0.97,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the second-largest city in Lithuania?",
+        "chosen": "Kaunas",
+        "correct_answer": "Kaunas",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How many countries share a land border with Russia? (Not including disputed territories)",
+        "chosen": "14",
+        "correct_answer": "14",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How many stations does the Central Line have on the London Underground?",
+        "chosen": "49",
+        "correct_answer": "49",
+        "was_correct": true,
+        "stated_confidence": 0.55,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In which century did the first fax machine technology get patented?",
+        "chosen": "19th century (1843)",
+        "correct_answer": "19th century (1843)",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What is the plane curve proposed by Descartes to challenge Fermat's extremum-finding techniques called?",
+        "chosen": "Folium of Descartes",
+        "correct_answer": "Folium of Descartes",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What common name is given to the medial condition, tibial stress syndrome (MTSS)?",
+        "chosen": "Shin Splints",
+        "correct_answer": "Shin Splints",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which spice comes from the aril (lacy covering) surrounding the nutmeg seed?",
+        "chosen": "Mace",
+        "correct_answer": "Mace",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "In The Lies Of Locke Lamora, what does \"Lamora\" mean in Throne Therin?",
+        "chosen": "Shadow",
+        "correct_answer": "Shadow",
+        "was_correct": true,
+        "stated_confidence": 0.55,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "\"The Big Bang Theory\" was first theorized by a priest of what religious ideology?",
+        "chosen": "Catholic",
+        "correct_answer": "Catholic",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "science",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which US state shares a border with the most other states?",
+        "chosen": "Tennessee and Missouri (tied at 8)",
+        "correct_answer": "Tennessee and Missouri (tied at 8)",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How many members are there in the idol group \"µ's\"?",
+        "chosen": "9",
+        "correct_answer": "9",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "What year is on the flag of the US state Wisconsin?",
+        "chosen": "1848",
+        "correct_answer": "1848",
+        "was_correct": true,
+        "stated_confidence": 0.85,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The Berlin Wall fell in which year?",
+        "chosen": "1989",
+        "correct_answer": "1989",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The Scoville scale measures the concentration of which compound in chili peppers?",
+        "chosen": "Capsaicin",
+        "correct_answer": "Capsaicin",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which country is the actual birthplace of the croissant's ancestor, the kipferl?",
+        "chosen": "Austria",
+        "correct_answer": "Austria",
+        "was_correct": true,
+        "stated_confidence": 0.92,
+        "category": "food",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which author wrote 'The Adventures of Sherlock Holmes'?",
+        "chosen": "Arthur Conan Doyle",
+        "correct_answer": "Arthur Conan Doyle",
+        "was_correct": true,
+        "stated_confidence": 0.99,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Van Gogh sold approximately how many paintings during his lifetime?",
+        "chosen": "Very few (commonly cited as one)",
+        "correct_answer": "Very few (commonly cited as one)",
+        "was_correct": true,
+        "stated_confidence": 0.88,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these deserts is the largest by area?",
+        "chosen": "Antarctic Desert",
+        "correct_answer": "Antarctic Desert",
+        "was_correct": true,
+        "stated_confidence": 0.9,
+        "category": "geography",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The painting \"The Starry Night\" by Vincent van Gogh was part of which art movement?",
+        "chosen": "Post-Impressionism",
+        "correct_answer": "Post-Impressionism",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "arts",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these films was released first?",
+        "chosen": "The Terminator",
+        "correct_answer": "The Terminator",
+        "was_correct": true,
+        "stated_confidence": 0.95,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "The Second Boer War in 1899 was fought where?",
+        "chosen": "South Africa",
+        "correct_answer": "South Africa",
+        "was_correct": true,
+        "stated_confidence": 0.98,
+        "category": "history",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which of these voices wasn't a choice for the House AI in \"The Simpsons Treehouse of Horror\" short, House of Whacks?",
+        "chosen": "George Clooney",
+        "correct_answer": "George Clooney",
+        "was_correct": true,
+        "stated_confidence": 0.7,
+        "category": "pop",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which country originated the sauce that became modern ketchup, from a fermented fish sauce called 'ke-tsiap'?",
+        "chosen": "China",
+        "correct_answer": "China",
+        "was_correct": true,
+        "stated_confidence": 0.6,
+        "category": "food",
+        "difficulty": "hard"
+      }
+    ]
+  }
+]
