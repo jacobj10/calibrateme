@@ -1736,10 +1736,11 @@ const AI_BASELINES = /*__AI_START__*/{
       // --- practice what we preach: the translated value is an estimate from
       // however many answers landed at this confidence level. Hedge the verb
       // and show the Wilson interval so we don't state a point estimate from
-      // two data points as if it were fact. ---
+      // two data points as if it were fact. Count from careerRecords, not the
+      // round/career toggle slice: the models are always fit on career history. ---
       let nearestLvl = Calib.LIKERT[0];
       for (const lv of Calib.LIKERT) if (Math.abs(lv - x) < Math.abs(nearestLvl - x)) nearestLvl = lv;
-      const at = active.filter((r) => Math.abs(r.conf - nearestLvl) < 1e-9);
+      const at = careerRecords.filter((r) => Math.abs(r.conf - nearestLvl) < 1e-9);
       const kAt = at.reduce((a, r) => a + (r.correct ? 1 : 0), 0);
       const w = Calib.wilson(kAt, at.length);
       const verbEl = qs("#probeVerb"), cavEl = qs("#probeCaveat");
